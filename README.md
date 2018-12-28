@@ -21,11 +21,11 @@ Poichè non è stato implementato un sistema all'interno del server tramite il q
 - Il nome utente deve essere almeno di 5 caratteri a causa del metodo di generazione del token
 - Se l'apertura del file fallisce, o perché non esiste o per altri impedimenti, il programma popolerà il primo elemento dell'array con le credenziali nome="default" e password="default"
 - Esempio di struttura di un file "clients.txt", dove ogni riga ha la sintassi ("%s %s", NOME, PASSWORD):
-	alessio twinings
-	aurelia pompadour
-	greta kimbo
-	vittorio lipton
-	giorgia nescafe
+	alessio | twinings
+	aurelia | pompadour
+	greta | kimbo
+	vittorio | lipton
+	giorgia | nescafe
 
 ### ESEMPIO DI ESECUZIONE
 // Work in progress...
