@@ -31,7 +31,23 @@ vittorio | lipton
 giorgia | nescafe
 
 ### ESEMPIO DI ESECUZIONE
-// Work in progress...
+[Clicca per visualizzare il video dell'esempio seguente](https://drive.google.com/file/d/19yFHh80QjfjIGbFit18p2qZiUJmqzFD_/view?usp=sharing)
+
+Per replicare la seguente dimostrazione, i file RTF di esempio usati nel download e l'upload e la lista clients.txt sono dipsonibili nella cartella "Esempio" della repository.
+Nota che la home directory del server in questo esempio è "/Users/alessiogiordano/Desktop/" e non "/Users/alessiogiordano/" per risparmiare tempo in fase di avvio (meno file da indicizzare). Quella del client invece non ha subito variazioni.
+
+###### Step 1: Avvio il server
+![Step 1](https://drive.google.com/uc?export=download&id=1945adm7O8U74mfsm_-c1ON8G7mq6BmtP)
+###### Step 2: Avvio il client, specifico "local" come indirizzo IP (scorciatoia per 127.0.0.1), quindi specifico utente e password
+![Step 2](https://drive.google.com/uc?export=download&id=1W2yEOTmguFNAZnYvPlLllTSRX-Abdb4D)
+###### Step 3: Dal client chiedo al server di fornirmi la lista dei file disponibili
+![Step 3](https://drive.google.com/uc?export=download&id=1JcBQh4jj2CjzFfQjWQg9ba19gQsddkHP)
+###### Step 4: Dal client chiedo al server di scaricare il file /Users/alessiogiordano/Desktop/download_test.rtf
+![Step 4](https://drive.google.com/uc?export=download&id=1bgsn-dQkqEyYrrY9mzWmBU3HidvFbaxU)
+###### Step 5: Dal client chiedo al server di caricare il file /Users/alessiogiordano/Desktop/upload_test.rtf
+![Step 5](https://drive.google.com/uc?export=download&id=1P0Mib8s10e0VLVJXSt4Mo8TsU1-EObbW)
+###### Step 6: Dal client chiedo al server di terminare la sessione
+![Step 6](https://drive.google.com/uc?export=download&id=1xLtP3LV2GMNr924RaReaGhd49m_daXAr)
 
 ### SVILUPPO
 La prima criticità da affrontare nello sviluppo è stata la scelta del sistema di login. L'uso di una comunicazione in chiaro mi ha fatto preferire un sistema di autenticazione basato su token, in modo tale che nome e password vengano scambiati una volta sola, quindi anche se la comunicazione fra client e server dovesse essere intercettata dopo il login iniziale, le credenziali scelte non sono compromesse e basta un riavvio del server per eliminare il vecchio token dal sistema; tuttavia la scelta del metodo di generazione del token ha richiesto della riflessione: deve essere univoco, anche se due utenti lo richiedono contemporaneamente; ho deciso, dunque, di generare una stringa contenente tre caratteri presi dal nome utente, uno all'inizio e gli altri due alla fine, quindi l'UNIX timestamp in mezzo. Il token così generato viene inviato al client, che lo userà per le chiamate successive, e salvato nel campo token della struct utente nell'array dei clienti (sostituendo un eventuale token precedentemente creato).
