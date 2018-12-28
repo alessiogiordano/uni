@@ -1,7 +1,7 @@
 # Università
-Alessio Giordano - O46001858 - Sistemi Operativi - A.A. 2018-19
+Alessio Giordano - O46001858
 
-# Consegna di Sistemi Operativi
+# Consegna di Sistemi Operativi - A.A. 2018-19
 
 ### CONSEGNA 1
 La prima consegna indicizza l'intero file system a partire dalla radice e produce una lista di Pathname Assoluti; dopo che il main thread ha indicizzato la radice, vengono lanciati N thread quante sono gli N processori disponibili, che scansionano la lista creata in cerca di directory da indicizzare; quando la lista non conterrà più directory, gli N thread verranno terminati; nel frattempo, il main thread scansiona la lista in cerca di pathname assoluti associati a file, che vengono stampati a video.
