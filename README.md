@@ -3,6 +3,8 @@ Alessio Giordano - O46001858
 
 # Consegna di Sistemi Operativi - A.A. 2018-19
 
+I file sorgente in C delle sue consegne sono contenuti rispettivamente nelle due cartelle "Consegna 1" e "Consegna 2"
+
 ### CONSEGNA 1
 La prima consegna indicizza l'intero file system a partire dalla radice e produce una lista di Pathname Assoluti; dopo che il main thread ha indicizzato la radice, vengono lanciati N thread quante sono gli N processori disponibili, che scansionano la lista creata in cerca di directory da indicizzare; quando la lista non conterrà più directory, gli N thread verranno terminati; nel frattempo, il main thread scansiona la lista in cerca di pathname assoluti associati a file, che vengono stampati a video.
 
@@ -33,7 +35,7 @@ giorgia | nescafe
 ### ESEMPIO DI ESECUZIONE
 [Clicca per visualizzare il video dell'esempio seguente](https://drive.google.com/file/d/19yFHh80QjfjIGbFit18p2qZiUJmqzFD_/view?usp=sharing)
 
-Per replicare la seguente dimostrazione, i file RTF di esempio usati nel download e l'upload e la lista clients.txt sono dipsonibili nella cartella "Esempio" della repository.
+Per replicare la seguente dimostrazione, i file RTF di esempio usati nel download e l'upload e la lista clients.txt sono dipsonibili nella cartella "File di Esempio" della repository.
 Nota che la home directory del server in questo esempio è "/Users/alessiogiordano/Desktop/" e non "/Users/alessiogiordano/" per risparmiare tempo in fase di avvio (meno file da indicizzare). Quella del client invece non ha subito variazioni.
 
 ###### Step 1: Avvio il server
