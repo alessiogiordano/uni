@@ -3,10 +3,10 @@ Alessio Giordano - O46001858 - Sistemi Operativi - A.A. 2018-19
 
 # Consegna di Sistemi Operativi
 
-##CONSEGNA 1
+## CONSEGNA 1
 La prima consegna indicizza l'intero file system a partire dalla radice e produce una lista di Pathname Assoluti; dopo che il main thread ha indicizzato la radice, vengono lanciati N thread quante sono gli N processori disponibili, che scansionano la lista creata in cerca di directory da indicizzare; quando la lista non conterrà più directory, gli N thread verranno terminati; nel frattempo, il main thread scansiona la lista in cerca di pathname assoluti associati a file, che vengono stampati a video.
 
-##CONSEGNA 2
+## CONSEGNA 2
 La seconda consegna si compone di due software, un client ed un server, che comunicano tramite socket TCP su porta "8960" e consentono:
 - il download di tutti i file indicizzati, a partire dalla home directory del server, sulla cartella "$HOMEDIR/recvdir" nel client (se non esiste viene creata).
 - l'upload di un file del client che viene salvato sulla directory "$HOMEDIR/recvdir" nel server (se non esiste viene creata).
@@ -27,10 +27,10 @@ Poichè non è stato implementato un sistema all'interno del server tramite il q
 	vittorio lipton
 	giorgia nescafe
 
-##ESEMPIO DI ESECUZIONE
+## ESEMPIO DI ESECUZIONE
 // Work in progress...
 
-##SVILUPPO
+## SVILUPPO
 La prima criticità da affrontare nello sviluppo è stata la scelta del sistema di login. L'uso di una comunicazione in chiaro mi ha fatto preferire un sistema di autenticazione basato su token, in modo tale che nome e password vengano scambiati una volta sola, quindi anche se la comunicazione fra client e server dovesse essere intercettata dopo il login iniziale, le credenziali scelte non sono compromesse e basta un riavvio del server per eliminare il vecchio token dal sistema; tuttavia la scelta del metodo di generazione del token ha richiesto della riflessione: deve essere univoco, anche se due utenti lo richiedono contemporaneamente; ho deciso, dunque, di generare una stringa contenente tre caratteri presi dal nome utente, uno all'inizio e gli altri due alla fine, quindi l'UNIX timestamp in mezzo. Il token così generato viene inviato al client, che lo userà per le chiamate successive, e salvato nel campo token della struct utente nell'array dei clienti (sostituendo un eventuale token precedentemente creato).
 
 La seconda è stata il posizionamento dei file scaricati dal client/caricati nel server. Se inizalmente pensavo di replicare la struttura del percorso del mittente nel destinatario, ciò avrebbe complicato il programma nonché la facilità per il desitinatario di trovare i file ricevuti dall'esterno: creare una sola cartella dei file ricevuti "recvdir" nel primo livello della home directory (che ho indicato in precedenza come "$HOMEDIR/" - es. "/home/alessiogiordano/") semplifica tutto ciò. Tuttavia, questo richiede l'estrazione del nome del file a partire dal percorso assoluto fornito, al cui scopo ho implementato una funzione "LastIndexOf()" che utilizzo per trovare l'ultima occorrenza del carattere "/" nel pathname assoluto, quindi sommo questo indice al puntatore della stringa quando faccio la strcpy() per ottenere il nome del file
@@ -52,7 +52,7 @@ Inoltre, data la complessità di codice superiore al tipico "compitino" svolto i
 
 non è affatto semplice, dal momento che nessuna di esse rappresenta un errore sintattico riconosciuto in fase di compilazione, ma si tratta di errori logici che compromettono l'esecuzione del programma.
 
-##SVILUPPI FUTURI
+## SVILUPPI FUTURI
 Dal punto di vista della sicurezza, passare da una comunicazione in chiaro ad una crittografata è sicuramente un obiettivo di sviluppo futuro di primaria importanza.
 
 Dal punto di vista delle prestazioni, eseguire l'indicizzazione della home directory all'avvio può rappresentare un forte problema nel caso di un numero elevato di file e cartelle, sia per i tempi sia per il grande consumo di memoria ram - è quindi preferibili in versioni future, eseguire questa operazione periodicamente e salvarne il risultato su un file di testo, da richiamare all'occorrenza quando il client richiede un LIST.
